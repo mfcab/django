@@ -1,7 +1,7 @@
 {%extends "base.html" %}
 {% block mainbody %}
 
-    {% for post in post_list %}
+{% for post in contacts %}
 <article class="d-flex flex-column align-content-start ">
   <header class="text-center">
     <h1>
@@ -25,4 +25,19 @@
     {% empty %}
         <div>暂时还没有发布的文章！</div>
     {% endfor %}
+<div class="pagination-simple">
+
+ {% if contacts.has_previous %}
+
+ <a href="?page={{contacts.previous_page_number }}">上一页</a>
+
+ {% endif %}
+
+ <span class="current">第{{ contacts.number }}页/共{{ contacts.paginator.num_pages }}页</span>
+
+ {% if contacts.has_next %} <a href="?page={{ contacts.next_page_number }}">下一页</a>
+
+ {% endif %}
+
+ </div>
 {% endblock %}

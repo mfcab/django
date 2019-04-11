@@ -26,7 +26,7 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link text-dark">首页</a>
+        <a class="nav-link text-dark" href="/">首页</a>
       </li>
       <li class="nav-item">
         <a class="nav-link text-dark">关于</a>
@@ -83,7 +83,7 @@
   <ul>
     {% for tag in tag_list %}
     <li class="tags">
-      <a href="#">{{ tag.name }}</a>
+      <a href="{% url 'blog:tags' tag.pk %}">{{ tag.name }}</a>
     </li>
     {% empty %}
     暂无分类！
