@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block mainbody %}
+<header class="text-center">
+    <h1>
+    {{ post.title }}
+    </h1><div class="gaps"></div>
+    <div>
+      <span><a href="#">{{ post.category.name }}</a></span>
+      <span><a href="#"><time class="entry-date"
+                                                datetime="{{ post.created_time }}">{{ post.created_time }}</time></a></span>
+      <span><a href="#">{{ post.author }}</a></span>
+      <span><a href="#">4 评论</a></span>
+      <span><a href="#">588 阅读</a></span>
+    </div>
+  </header>
+    <div class="gaps"></div>
+{% autoescape off %}
+{{ post.body }}
+{% endautoescape  %}
+
+{% endblock %}
+

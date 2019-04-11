@@ -1,0 +1,28 @@
+{%extends "base.html" %}
+{% block mainbody %}
+
+    {% for post in post_list %}
+<article class="d-flex flex-column align-content-start ">
+  <header class="text-center">
+    <h1>
+    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+    </h1><div class="gaps"></div>
+    <div>
+      <span><a href="#">{{ post.category.name }}</a></span>
+      <span><a href="#"><time class="entry-date"
+                                                datetime="{{ post.created_time }}">{{ post.created_time }}</time></a></span>
+      <span><a href="#">{{ post.author }}</a></span>
+      <span><a href="#">4 评论</a></span>
+      <span><a href="#">588 阅读</a></span>
+    </div>
+  </header>
+    <div class="gaps"></div>
+  <div>
+    {{ post.excerpt }}
+  </div>
+</article>
+    <div class="gap"></div>
+    {% empty %}
+        <div>暂时还没有发布的文章！</div>
+    {% endfor %}
+{% endblock %}

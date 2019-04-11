@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load blog_tags %}
+<html>
+<head>
+    <title>PCBlog</title>
+
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    <link rel="stylesheet" href="/static/blog/css/main.css">
+</head>
+
+<body>
+<div class="container">
+    <header id="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark site-header">
+  <a class="navbar-brand"><H1>PCblog</H1></a>
+            <div>
+  <button class="navbar-toggler bg-dark" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-dark">首页</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-dark">关于</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-dark">联系</a>
+      </li>
+    </ul>
+  </div></div>
+</nav>
+    </header>
+    <hr>
+    <div class="content-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block mainbody %}
+
+            {% endblock %}
+            </div>
+            <aside class="col-md-4">
+                <div>
+  <h3>最新文章</h3>
+  {% get_recent_posts as recent_post_list %}
+  <ul>
+    {% for post in recent_post_list %}
+      <div class="gapm"></div>
+    <li>
+      <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+    </li>
+    {% empty %}
+    暂无文章！
+    {% endfor %}
+  </ul>
+</div>
+                <div class="gaps"></div>
+                <div>
+  <h3>分类</h3>
+  {% get_categories as category_list %}
+  <ul>
+    {% for category in category_list %}
+    <li>
+      <a href="{% url 'blog:category' category.pk %}">{{ category.name }} <span>({{ category.num_posts }})</span></a>
+    </li>
+    {% empty %}
+    暂无分类！
+    {% endfor %}
+  </ul>
+</div>
+                <div class="gaps"></div>
+               <div>
+  <h3>标签</h3>
+  {% get_tags as tag_list %}
+  <ul>
+    {% for tag in tag_list %}
+    <li class="tags">
+      <a href="#">{{ tag.name }}</a>
+    </li>
+    {% empty %}
+    暂无分类！
+    {% endfor %}
+  </ul>
+</div>
+            </aside>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+</html>
