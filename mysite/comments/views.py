@@ -14,7 +14,7 @@ def post_comment(request, post_pk):
         form = CommentForm(request.POST)
 
         if form.is_valid():
-
+            post.increase_comment()
             comment = form.save(commit=False)
             comment.post = post
             comment.save()

@@ -25,6 +25,8 @@ class Post(models.Model):
     category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
     tags = models.ManyToManyField(Tag, blank=True)
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    views = models.PositiveIntegerField(default=0)
+    commentsub = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -32,4 +34,11 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blog:detail', kwargs={'pk': self.pk})
 
+    def increase_views(self):
+        self.views += 1
+        self.save(update_fields=['views'])
+
+    def increase_comment(self):
+        self.commentsub += 1
+        self.save(update_fields=['commentsub'])
 
