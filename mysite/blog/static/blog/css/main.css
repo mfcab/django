@@ -26,3 +26,8 @@ margin-right:5px;
 display:inline-block;
 float:left；
 }
+#id_text{
+resize:none;
+height:50px;
+width:70%;
+ }

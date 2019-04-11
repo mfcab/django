@@ -17,6 +17,46 @@
 {% autoescape off %}
 {{ post.body }}
 {% endautoescape  %}
-
+<div class="gaps"></div>
+<hr>
+<form action="{% url 'comments:post_comment' post.pk %}" method="post" class="comment-form">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-md-4">
+      <label for="{{ form.name.id_for_label }}">名字：</label>
+      {{ form.name }}
+      {{ form.name.errors }}
+    </div>
+    <div class="col-md-4 offset-md-2">
+      <label for="{{ form.email.id_for_label }}">邮箱：</label>
+      {{ form.email }}
+      {{ form.email.errors }}
+    </div>
+      <div class="gapm"></div>
+    <div class="col-md-12">
+      <label for="{{ form.text.id_for_label }}">评论：</label>
+      {{ form.text }}
+      {{ form.text.errors }}
+      <button type="submit" class="comment-btn">发表</button>
+    </div>
+  </div>    <!-- row -->
+</form>
+<div class="gap"></div>
+<H3>评论列表</H3>
+<div class="gaps"></div>
+<ul>
+  {% for comment in comment_list %}
+  <li>
+    <span>{{ comment.name }}</span>
+    <time>{{ comment.created_time }}</time>
+      <div class="gaps"></div>
+    <div>
+      {{ comment.text }}
+    </div>
+  </li>
+  {% empty %}
+  暂无评论
+  {% endfor %}
+</ul>
 {% endblock %}
 
